@@ -6,16 +6,16 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:48:08 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/05/27 10:19:21 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/06/07 01:38:47 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pihlo.h"
 
-void	print(t_rules *philo, char *str, long time)
+void	print(t_rules *philo, char *str, long time, int id)
 {
 	pthread_mutex_lock(&philo->print);
-	printf("%ld ms : Philo %d %s", time, philo->id, str);
+	printf("%ld ms : Philo %d %s", time, id + 1, str);
 	pthread_mutex_unlock(&philo->print);
 }
 int	exit_error(void)

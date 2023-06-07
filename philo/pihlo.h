@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:21:08 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/05/27 23:46:28 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/06/07 02:45:26 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ typedef struct s_rules
 int		exit_error(void);
 int		ft_atoi(char *str);
 int		check_Args(char **av);
-void	print(t_rules *philo, char *str, long time);
+void	print(t_rules *philo, char *str, long time, int id);
 
 /* ------------- init ------------- */
+int	check_death(t_rules *philo);
 int	init_rules(char **av, t_rules *rules);
 int	init_philo(t_rules *rules);
 
@@ -52,5 +53,6 @@ int	init_philo(t_rules *rules);
 unsigned long	current_time(t_rules *philo);
 long			ft_time (void);
 void			sleep_time(long t_to_sleep);
+
 
 #endif
