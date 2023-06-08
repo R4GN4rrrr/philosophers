@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 21:59:21 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/06/07 03:04:03 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/06/08 05:36:26 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void *routine(void *arg)
 	philo = (t_rules *) arg;
 	right = &philo->forks[philo->id];
 	left = &philo->forks[(philo->id + 1) % philo->nb_philo];
+	pthread_mutex_lock(&philo->mutex);
 	int id = philo->id;
+	pthread_mutex_unlock(&philo->mutex);
 	while (1)
 	{
 		pthread_mutex_lock(right);
@@ -30,7 +32,7 @@ void *routine(void *arg)
 		print(philo, "has taken a fork\n",current_time(philo), id);
 		print(philo, "is eating\n", current_time(philo), id);
 		pthread_mutex_lock(&philo->mutex);
-		philo->last_eat[philo->id] = current_time(philo);
+		philo->last_eat[id] = current_time(philo);
 		pthread_mutex_unlock(&philo->mutex);
 		sleep_time(philo->t_to_eat);
 		pthread_mutex_lock(&philo->mutex);
@@ -40,7 +42,6 @@ void *routine(void *arg)
 		pthread_mutex_unlock(left);
 		sleep_time(philo->t_to_sleep);
 	}
-	return(0);
 }
 
 int	check_death(t_rules *philo)
@@ -52,17 +53,25 @@ int	check_death(t_rules *philo)
 		i = 0;
 		pthread_mutex_lock(&philo->mutex);
 		if (philo->nb_must_eat != -1 && philo->nb_must_eat * philo->nb_philo == philo->meals)
-			return (0);
+		{
+			int j = 0;
+			while (j < philo->nb_philo)
+			{
+				pthread_detach(philo->philo[j]);
+				j++;
+			}
+			return (1);
+		}
 		while (i < philo->nb_philo)
 		{
-			if (current_time(philo) - philo->last_eat[philo->id] >= philo->t_to_die)
+			if (philo->t_to_die <= current_time(philo) - philo->last_eat[philo->id])
 			{
-				print(philo, "is dead\n", current_time(philo), philo->id);
+				// print(philo, "is dead\n", current_time(philo), philo->id);
+				pthread_mutex_lock(&philo->print);
+				printf("%ld ms : Philo %d %s", current_time(philo), philo->id + 1, "is dead\n");
 				return (1);
 			}
 			i++;
-			// if (i == philo->nb_philo)
-			// 	i = 0;
 		}
 		pthread_mutex_unlock(&philo->mutex);
 	}
@@ -118,6 +127,7 @@ int init_philo(t_rules *rules)
 	while (i < rules->nb_philo)
 	{
 		rules->id = i;
+		rules->last_eat[i] = current_time(rules);
 		if (pthread_create(&rules->philo[i], NULL, &routine, rules))
 		{
 			printf("Error\n, Creation failed!!");
