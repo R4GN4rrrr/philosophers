@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:48:08 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/06/07 01:38:47 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/06/09 02:47:28 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	print(t_rules *philo, char *str, long time, int id)
 	printf("%ld ms : Philo %d %s", time, id + 1, str);
 	pthread_mutex_unlock(&philo->print);
 }
+
 int	exit_error(void)
 {
 	printf("Error in Params please enter: nb_philo\
@@ -63,14 +64,14 @@ int	is_digit(char *str)
 	}
 	return (1);
 }
-int	check_Args(char **av)
+
+int	check_args(char **av)
 {
 	int	i;
 
 	i = 1;
 	while (av[i])
 	{
-		
 		if (!is_digit(av[i]))
 		{
 			write(2, "must be digits\n", 16);
