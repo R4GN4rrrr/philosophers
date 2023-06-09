@@ -6,11 +6,11 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 21:50:34 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/06/09 02:42:57 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/06/09 04:17:43 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pihlo.h"
+#include "philo.h"
 
 long	ft_time(void)
 {

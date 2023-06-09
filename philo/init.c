@@ -6,11 +6,11 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 21:59:21 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/06/09 02:41:35 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/06/09 04:21:51 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pihlo.h"
+#include "philo.h"
 
 void	*routine(void *arg)
 {
@@ -42,6 +42,7 @@ void	*routine(void *arg)
 		pthread_mutex_unlock(right);
 		pthread_mutex_unlock(left);
 		sleep_time(philo->t_to_sleep);
+		print(philo, "is sleeeping\n", current_time(philo), id);
 		print(philo, "is thinking\n", current_time(philo), id);
 	}
 }

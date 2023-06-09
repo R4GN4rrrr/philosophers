@@ -6,11 +6,11 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:22:42 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/06/09 02:47:42 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/06/09 04:17:26 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pihlo.h"
+#include "philo.h"
 
 // int	main(int ac, char **av)
 // {

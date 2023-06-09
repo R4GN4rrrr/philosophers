@@ -6,11 +6,11 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:48:08 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/06/09 02:47:28 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/06/09 04:17:51 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pihlo.h"
+#include "philo.h"
 
 void	print(t_rules *philo, char *str, long time, int id)
 {
