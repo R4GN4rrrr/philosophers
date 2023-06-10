@@ -6,7 +6,7 @@
 /*   By: ymenyoub <ymenyoub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 21:59:21 by ymenyoub          #+#    #+#             */
-/*   Updated: 2023/06/09 22:26:41 by ymenyoub         ###   ########.fr       */
+/*   Updated: 2023/06/10 03:33:54 by ymenyoub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ void	norm(t_rules *philo, pthread_mutex_t *right,
 	pthread_mutex_unlock(&philo->mutex);
 	pthread_mutex_unlock(right);
 	pthread_mutex_unlock(left);
-	sleep_time(philo->t_to_sleep);
 	print(philo, "is sleeeping\n", current_time(philo), id);
+	sleep_time(philo->t_to_sleep);
 	print(philo, "is thinking\n", current_time(philo), id);
 }
 
-void	*routine(void *arg)
+void	*routine(void *av)
 {
 	pthread_mutex_t	*right;
 	pthread_mutex_t	*left;
 	t_rules			*philo;
 	long			id;
 
-	philo = (t_rules *) arg;
+	philo = (t_rules *) av;
 	right = philo->forks + philo->id;
 	left = philo->forks + (philo->id + 1) % philo->nb_philo;
 	pthread_mutex_lock(&philo->mutex);
